@@ -1,0 +1,75 @@
+body{
+    background-color: #f3f3f3;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+header{
+    height: 80px;
+    width: 100%;
+   position: fixed;
+   display: flex;
+   justify-content: space-between;
+   background-color: #ffffff;
+   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+   top: 0px;
+   left: 0px;
+} 
+.teclado{
+    height: 80px;
+    width: 100%;
+    margin-top: 587px;
+    background-color: #ffffff;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+}
+.logouol img{
+    height: 53px;
+    width: 75px;
+    margin-left: 22px;
+    margin-top: 16px;
+}
+.logo .icone{
+    height: 30.93753433227539px;
+    width: 42.18772506713867px;
+    margin-right: 24px;
+    margin-top:25px;
+    color: black;
+    
+}
+.enviar{
+    height: 26px;
+    width: 26px;
+    margin-left: -8px;
+} 
+input{
+   margin-top: 30px;
+    border: none;
+    margin-left: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-style: italic;
+    line-height: 21px;
+    text-align: left;  
+}
+button{
+    height: 26px;
+    width: 26px;
+    margin-left: 120px;
+    margin-top: 27px;
+    
+    background-color: #ffffff;
+    border: none;
+}
+.chat{
+    margin-top: 100px;
+    margin-bottom: 80px;
+    overflow: hidden;
+}
+li{
+    list-style-type: none;
+    margin-left: -30px;
+    background-color: aqua;
+    margin-bottom: 5px;
+}
