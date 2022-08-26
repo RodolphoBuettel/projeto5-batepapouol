@@ -1,4 +1,4 @@
-const msgns = [];
+//const msgns = [];
 let nomeDoUser = {};
 let nome;
 
@@ -48,6 +48,10 @@ function carregaMensagens(resposta){
     renderizarMensagens(listaMensagem);
 }
 
+function tratarErro(){
+    console.log(erro.response);
+}
+
 function buscaMensagem(){
     pegarMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     pegarMensagem.then(carregaMensagens);
@@ -80,10 +84,35 @@ function renderizarMensagens(mensagensPassadas){
     }
 }
 
-setInterval(buscaMensagem, 3000);
+//setInterval(buscaMensagem, 3000);
 
-function tratarErro(){
-    console.log(erro.response);
+let contemMensagem;
+
+function enviarMensagem(){
+    
+    const mensagemDigitada = document.querySelector('input').value;
+    console.log(mensagemDigitada);
+    
+    contemMensagem = {from: nome,
+    to: 'Todos',
+    text: mensagemDigitada,
+    type: 'message'
+    }
+    console.log(contemMensagem);
+    let enviaMensagem  = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', contemMensagem);
+    enviaMensagem.then(mensagemEnviada);
+    enviaMensagem.catch(console.log("Deu ruim "));
+}
+
+function mensagemEnviada(){
+    const ul = document.querySelector('.chat ul');
+    const item = `<li class = "conversando">
+                    <span class = "negrito">${contemMensagem.from}</span> para 
+                    <span class = "negrito">${contemMensagem.to}</span>: ${contemMensagem.text}
+                    </li>`;
+    console.log(item);              
+    ul.innerHTML = ul.innerHTML + item;
+    console.log(ul); 
 }
 
 
