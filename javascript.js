@@ -84,7 +84,7 @@ function renderizarMensagens(mensagensPassadas){
     }
 }
 
-//setInterval(buscaMensagem, 3000);
+setInterval(buscaMensagem, 3000);
 
 let contemMensagem;
 
