@@ -40,44 +40,50 @@ function verificaStatus(){
 setInterval(verificaStatus, 5000);
 
 let pegarMensagem;
+let listaMensagem = [];
+
+function carregaMensagens(resposta){
+    listaMensagem  = resposta.data;
+    console.log(listaMensagem);
+    renderizarMensagens(listaMensagem);
+}
 
 function buscaMensagem(){
     pegarMensagem = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-    pegarMensagem.then(mensagens);
+    pegarMensagem.then(carregaMensagens);
+    pegarMensagem.catch(tratarErro);
 }
 
 buscaMensagem()
 
-function mensagens(resposta){
-
-    console.log(resposta.data);
+function mensagemUl(mensagens){
+    if(mensagens.text === "entra na sala..." || mensagens.text === "sai da sala..."){
+         return `<li class = "entrouNaSala">
+                   (${mensagens.time}) <span class = "negrito">${mensagens.from}</span>
+                    ${mensagens.text}
+                 </li>`
+    }else{
+        return `<li class = "conversando">
+        (${mensagens.time}) <span class = "negrito">${mensagens.from}</span> para 
+         <span class = "negrito">${mensagens.to}</span>:${mensagens.text}
+      </li>`
+    }
 }
 
-function enviarMensagem(){
-    const mensagemDigitada = document.querySelector('input');
+function renderizarMensagens(mensagensPassadas){
+    let chat = document.querySelector('.chat ul');
+    chat.innerHTML = " ";
 
+    for(let i = 0; i < mensagensPassadas.length; i++){
+        const mensagens = mensagensPassadas[i];
+        chat.innerHTML = chat.innerHTML + mensagemUl(mensagens);
+    }
+}
 
-    let combinacaoDeMensagem = {
-        from: nome,
-        text: mensagemDigitada.value
-    };
-console.log(combinacaoDeMensagem);
-    const enviaMensagem = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', combinacaoDeMensagem);
-    enviaMensagem.then(console.log(enviaMensagem));
+setInterval(buscaMensagem, 3000);
+
+function tratarErro(){
+    console.log(erro.response);
 }
 
 
-
-
-
-// const mensagem = document.querySelector('input').value;
- // console.log(mensagem); 
- // msgns.push(mensagem);
- // const item = `
- //     <li>
- //         ${mensagem}
- //     </li>
- // `;
- // const ul = document.querySelector('.chat ul');
- // console.log(ul);
- // ul.innerHTML = ul.innerHTML + item;

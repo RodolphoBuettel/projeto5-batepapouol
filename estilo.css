@@ -69,7 +69,23 @@ button{
 }
 li{
     list-style-type: none;
-    margin-left: -30px;
-    background-color: aqua;
-    margin-bottom: 5px;
+    /* margin-left: -30px; */
+    margin-bottom: 10px;
+}
+.negrito{
+    font-weight: bold;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+.entrouNaSala{
+    background-color: #dcdcdc;
+    height: 40px;
+    display: flex;
+    align-items: center;
+}
+.conversando{
+    background-color: #ffffff;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
