@@ -104,7 +104,7 @@ function enviarMensagem(){
     let enviaMensagem  = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', contemMensagem);
     enviaMensagem.then(mensagemEnviada);
     enviaMensagem.catch(naoFoi);
-    mensagemDigitada = document.querySelector('input').value = "";
+    document.querySelector('input').value = "";
 }
 
 function mensagemEnviada(){
