@@ -1,4 +1,4 @@
-//const msgns = [];
+
 let nomeDoUser = {};
 let nome;
 
@@ -30,7 +30,7 @@ function perguntaNome(){
 
 function ficouOff(){
 
-    alert('Ficou Off');
+    alert('Saiu da Sala');
 }
 function verificaStatus(){
     let promessa = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', nomeDoUser);
@@ -57,7 +57,6 @@ function buscaMensagem(){
     pegarMensagem.then(carregaMensagens);
     pegarMensagem.catch(tratarErro);
 }
-
 buscaMensagem()
 
 function mensagemUl(mensagens){
@@ -65,13 +64,15 @@ function mensagemUl(mensagens){
          return `<li class = "entrouNaSala">
                    (${mensagens.time}) <span class = "negrito">${mensagens.from}</span>
                     ${mensagens.text}
-                 </li>`
+                 </li>`      
     }else{
         return `<li class = "conversando">
         (${mensagens.time}) <span class = "negrito">${mensagens.from}</span> para 
          <span class = "negrito">${mensagens.to}</span>:${mensagens.text}
       </li>`
     }
+
+    
 }
 
 function renderizarMensagens(mensagensPassadas){
@@ -82,6 +83,7 @@ function renderizarMensagens(mensagensPassadas){
         const mensagens = mensagensPassadas[i];
         chat.innerHTML = chat.innerHTML + mensagemUl(mensagens);
     }
+    rolaMensagens();
 }
 
 setInterval(buscaMensagem, 3000);
@@ -90,7 +92,7 @@ let contemMensagem;
 
 function enviarMensagem(){
     
-    const mensagemDigitada = document.querySelector('input').value;
+    let mensagemDigitada = document.querySelector('input').value;
     console.log(mensagemDigitada);
     
     contemMensagem = {from: nome,
@@ -101,7 +103,8 @@ function enviarMensagem(){
     console.log(contemMensagem);
     let enviaMensagem  = axios.post('https://mock-api.driven.com.br/api/v6/uol/messages', contemMensagem);
     enviaMensagem.then(mensagemEnviada);
-    enviaMensagem.catch(console.log("Deu ruim "));
+    enviaMensagem.catch(naoFoi);
+    mensagemDigitada = document.querySelector('input').value = "";
 }
 
 function mensagemEnviada(){
@@ -115,4 +118,14 @@ function mensagemEnviada(){
     console.log(ul); 
 }
 
+function rolaMensagens(){
+    const elementoQueQueroQueApareca = document.querySelector('.chat ul').lastChild;
+    console.log(elementoQueQueroQueApareca);
+    elementoQueQueroQueApareca.scrollIntoView();
+}
+
+function naoFoi(){
+
+    alert("Mensagem não enviada");
+}
 
